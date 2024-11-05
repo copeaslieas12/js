@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { DotNetIcon } from "components/icons/brand-icons/DotNetIcon";
 import { ReactIcon } from "components/icons/brand-icons/ReactIcon";
 import { TypeScriptIcon } from "components/icons/brand-icons/TypeScriptIcon";
@@ -6,30 +7,29 @@ import { UnityIcon } from "components/icons/brand-icons/UnityIcon";
 import { UnrealIcon } from "components/icons/brand-icons/UnrealIcon";
 import { DocLink } from "components/shared/DocLink";
 import { ArrowRightIcon } from "lucide-react";
-import authIcon from "../../../../../../public/assets/tw-icons/auth.svg";
-import accountAbstractionIcon from "../../../../../../public/assets/tw-icons/account-abstraction.svg";
-import payIcon from "../../../../../../public/assets/tw-icons/pay.svg";
-import walletsIcon from "../../../../../../public/assets/tw-icons/wallets.svg";
-import socialAuthIcon from "../../../../../../public/assets/tw-icons/social-auth.svg";
-import Image, { StaticImageData } from "next/image";
-import { cn } from "@/lib/utils";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import accountAbstractionIcon from "../../../../../../public/assets/tw-icons/account-abstraction.svg";
+import authIcon from "../../../../../../public/assets/tw-icons/auth.svg";
+import payIcon from "../../../../../../public/assets/tw-icons/pay.svg";
+import socialAuthIcon from "../../../../../../public/assets/tw-icons/social-auth.svg";
+import walletsIcon from "../../../../../../public/assets/tw-icons/wallets.svg";
 
 export function EmptyState() {
   return (
-    <div className="md:h-[770px] py-24 p-6 container flex items-center justify-center">
-      <div className="flex-col gap-8 flex items-center group justify-center">
-        <div className="flex flex-col gap-6 max-w-[500px] justify-center items-center">
+    <div className="container flex items-center justify-center p-6 py-24 md:h-[770px]">
+      <div className="group flex flex-col items-center justify-center gap-8">
+        <div className="flex max-w-[500px] flex-col items-center justify-center gap-6">
           <AnimatedIcons />
-          <div className="text-center flex flex-col gap-0.5">
-            <h3 className="text-2xl font-semibold text-foreground">
+          <div className="flex flex-col gap-0.5 text-center">
+            <h3 className="font-semibold text-2xl text-foreground">
               Project Overview is Coming Soon
             </h3>
-            <p className="text-muted-foreground text-base">
+            <p className="text-base text-muted-foreground">
               Understand how users are interacting with your project
             </p>
           </div>
-          <div className="flex flex-wrap gap-2 justify-center items-center">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <SDKBadge
               icon={TypeScriptIcon}
               label="TypeScript"
@@ -71,7 +71,7 @@ export function EmptyState() {
           <Button asChild variant="primary">
             <Link href="https://thirdweb.com/dashboard/settings/api-keys">
               Get Started
-              <ArrowRightIcon className="size-4 ml-2" />
+              <ArrowRightIcon className="ml-2 size-4" />
             </Link>
           </Button>
         </div>
@@ -82,26 +82,26 @@ export function EmptyState() {
 
 function AnimatedIcons() {
   return (
-    <div className="flex -space-x-2">
+    <div className="-space-x-2 flex">
       <Icon
         icon={walletsIcon}
-        className="z-[0] -rotate-[16deg] group-hover:-rotate-[32deg] scale-1 group-hover:scale-[1.2] translate-x-[0px] group-hover:-translate-x-[44px] translate-y-[0px] group-hover:-translate-y-[12px]"
+        className="-rotate-[16deg] group-hover:-rotate-[32deg] group-hover:-translate-x-[44px] group-hover:-translate-y-[12px] z-[0] translate-x-[0px] translate-y-[0px] scale-1 group-hover:scale-[1.2]"
       />
       <Icon
         icon={payIcon}
-        className="z-[1] -rotate-[12deg] group-hover:-rotate-[24deg] scale-1 group-hover:scale-[1.2] translate-x-[0px] group-hover:-translate-x-[28px] -translate-y-[12px] group-hover:-translate-y-[40px]"
+        className="-rotate-[12deg] group-hover:-rotate-[24deg] group-hover:-translate-x-[28px] -translate-y-[12px] group-hover:-translate-y-[40px] z-[1] translate-x-[0px] scale-1 group-hover:scale-[1.2]"
       />
       <Icon
         icon={authIcon}
-        className="z-[2] scale-1 group-hover:scale-[1.2] -translate-y-[16px] group-hover:-translate-y-[52px]"
+        className="-translate-y-[16px] group-hover:-translate-y-[52px] z-[2] scale-1 group-hover:scale-[1.2]"
       />
       <Icon
         icon={accountAbstractionIcon}
-        className="z-[1] rotate-[12deg] group-hover:rotate-[24deg] scale-1 group-hover:scale-[1.2] translate-x-[0px] group-hover:translate-x-[28px] -translate-y-[12px] group-hover:-translate-y-[40px]"
+        className="-translate-y-[12px] group-hover:-translate-y-[40px] z-[1] translate-x-[0px] rotate-[12deg] scale-1 group-hover:translate-x-[28px] group-hover:rotate-[24deg] group-hover:scale-[1.2]"
       />
       <Icon
         icon={socialAuthIcon}
-        className="z-[0] rotate-[16deg] group-hover:rotate-[32deg] scale-1 group-hover:scale-[1.2] translate-x-[0px] group-hover:translate-x-[44px] translate-y-[0px] group-hover:-translate-y-[12px]"
+        className="group-hover:-translate-y-[12px] z-[0] translate-x-[0px] translate-y-[0px] rotate-[16deg] scale-1 group-hover:translate-x-[44px] group-hover:rotate-[32deg] group-hover:scale-[1.2]"
       />
     </div>
   );
@@ -117,7 +117,7 @@ function Icon({
   return (
     <div
       className={cn(
-        "border rounded-xl size-10 flex items-center justify-center bg-background transition-all duration-200 ease-in-out",
+        "flex size-10 items-center justify-center rounded-xl border bg-background transition-all duration-200 ease-in-out",
         className,
       )}
     >
@@ -138,7 +138,7 @@ function SDKBadge({
   href,
 }: { icon: React.FC<{ className?: string }>; label: string; href: string }) {
   return (
-    <div className="py-1 px-2.5 rounded-full bg-neutral-200 dark:bg-neutral-800">
+    <div className="rounded-full bg-neutral-200 px-2.5 py-1 dark:bg-neutral-800">
       <DocLink link={href} label={label} icon={icon} />
     </div>
   );

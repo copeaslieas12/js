@@ -42,7 +42,7 @@ export function RangeSelector({
   });
 
   return (
-    <div className="sm:flex-row flex-col flex justify-end gap-3">
+    <div className="flex flex-col justify-end gap-3 sm:flex-row">
       <DateRangeSelector
         range={computedRange || getLastNDaysRange("last-120")}
         setRange={(newRange) => {
