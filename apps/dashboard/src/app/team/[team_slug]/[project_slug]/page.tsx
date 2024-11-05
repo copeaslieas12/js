@@ -4,12 +4,12 @@ import { ProjectOverviewHeader } from "./components/ProjectOverviewHeader";
 import { EmptyState } from "./components/EmptyState";
 
 export default async function ProjectOverviewPage(props: {
-  params: { team_slug: string; project_slug: string };
-  searchParams: { from: string; to: string; type: string; interval: string };
+  params: Promise<{ team_slug: string; project_slug: string }>;
 }) {
-  const projects = await getProjects(props.params.team_slug);
+  const params = await props.params;
+  const projects = await getProjects(params.team_slug);
 
-  const project = projects.find((p) => p.slug === props.params.project_slug);
+  const project = projects.find((p) => p.slug === params.project_slug);
 
   if (!project) {
     notFound();
