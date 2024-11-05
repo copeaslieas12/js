@@ -1,0 +1,1 @@
+Medias in this folder are used for /drop/<slug>
