@@ -26,8 +26,7 @@ export function EmptyState() {
               Project Overview is Coming Soon
             </h3>
             <p className="text-muted-foreground text-base">
-              Understand how usees are interacting with your project in a
-              glance.
+              Understand how users are interacting with your project
             </p>
           </div>
           <div className="flex flex-wrap gap-2 justify-center items-center">
