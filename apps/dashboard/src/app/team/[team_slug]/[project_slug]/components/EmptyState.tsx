@@ -13,6 +13,7 @@ import walletsIcon from "../../../../../../public/assets/tw-icons/wallets.svg";
 import socialAuthIcon from "../../../../../../public/assets/tw-icons/social-auth.svg";
 import Image, { StaticImageData } from "next/image";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function EmptyState() {
   return (
@@ -22,50 +23,57 @@ export function EmptyState() {
           <AnimatedIcons />
           <div className="text-center flex flex-col gap-0.5">
             <h3 className="text-2xl font-semibold text-foreground">
-              Get started with the Connect SDK
+              Project Overview is Coming Soon
             </h3>
             <p className="text-muted-foreground text-base">
-              Add the Connect SDK to your app to start collecting analytics.
+              Understand how usees are interacting with your project in a
+              glance.
             </p>
           </div>
           <div className="flex flex-wrap gap-2 justify-center items-center">
             <SDKBadge
               icon={TypeScriptIcon}
               label="TypeScript"
-              href="https://portal.thirdweb.com/typescript/v5/inAppWallet"
+              href="https://portal.thirdweb.com/typescript/v5"
             />
             <SDKBadge
               icon={ReactIcon}
               label="React"
-              href="https://portal.thirdweb.com/react/v5/in-app-wallet/get-started"
+              href="https://portal.thirdweb.com/react/v5"
             />
             <SDKBadge
               icon={ReactIcon}
               label="React Native"
-              href="https://portal.thirdweb.com/react/v5/in-app-wallet/get-started"
+              href="https://portal.thirdweb.com/react-native/v5"
             />
             <SDKBadge
               icon={UnityIcon}
               label="Unity"
-              href="https://portal.thirdweb.com/unity/v5/wallets/in-app-wallet"
+              href="https://portal.thirdweb.com/unity/v5"
             />
             <SDKBadge
               icon={UnrealIcon}
               label="Unreal"
-              href="https://portal.thirdweb.com/unreal-engine/getting-started"
+              href="https://portal.thirdweb.com/unreal-engine"
             />
             <SDKBadge
               icon={DotNetIcon}
               label=".NET"
-              href="https://portal.thirdweb.com/flutter/v5/in-app-wallet/get-started"
+              href="https://portal.thirdweb.com/dotnet"
             />
           </div>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">View Docs</Button>
-          <Button variant="primary">
-            Get Started
-            <ArrowRightIcon className="size-4 ml-2" />
+          <Button variant="outline" asChild>
+            <Link href="https://portal.thirdweb.com/connect" target="_blank">
+              View Docs
+            </Link>
+          </Button>
+          <Button asChild variant="primary">
+            <Link href="https://thirdweb.com/dashboard/settings/api-keys">
+              Get Started
+              <ArrowRightIcon className="size-4 ml-2" />
+            </Link>
           </Button>
         </div>
       </div>
