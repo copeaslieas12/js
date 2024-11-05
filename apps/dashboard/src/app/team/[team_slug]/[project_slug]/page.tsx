@@ -1,6 +1,7 @@
 import { getProjects } from "@/api/projects";
 import { notFound } from "next/navigation";
 import { ProjectOverviewHeader } from "./components/ProjectOverviewHeader";
+import { EmptyState } from "./components/EmptyState";
 
 export default async function ProjectOverviewPage(props: {
   params: { team_slug: string; project_slug: string };
@@ -15,12 +16,13 @@ export default async function ProjectOverviewPage(props: {
   }
 
   return (
-    <div>
-      <div className="w-full border-border-800 border-b bg-muted/50 px-6">
+    <div className="">
+      <div className="dark:bg-muted/50 w-full border-border-800 border-b px-6">
         <div className="container">
           <ProjectOverviewHeader project={project} />
         </div>
       </div>
+      <EmptyState />
     </div>
   );
 }

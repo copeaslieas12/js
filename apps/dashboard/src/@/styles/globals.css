@@ -6,7 +6,7 @@
   :root,
   [data-theme="light"] {
     /* bg - neutral  */
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --popover: 0 0% 100%;
     --card: 0 0% 100%;
     --secondary: 0 0% 92%;
