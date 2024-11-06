@@ -52,7 +52,7 @@ const generateDailyData = (days: number) => {
 
 function Component() {
   return (
-    <div className="container max-w-[800px] space-y-8">
+    <div className="container max-w-[800px] space-y-8 py-8">
       <BadgeContainer label="Views Data">
         <BarChart
           tooltipLabel="Daily Views"

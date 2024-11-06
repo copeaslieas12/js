@@ -39,7 +39,7 @@ export const WithNegativeTrend: Story = {
 
 function Component() {
   return (
-    <div className="container max-w-[400px] space-y-8">
+    <div className="container max-w-[400px] space-y-8 py-8">
       <BadgeContainer label="Basic">
         <Stat label="Total Users" value={1234} />
       </BadgeContainer>

@@ -35,35 +35,35 @@ const chartConfig = {
 const generateTimeSeriesData = (days: number) => {
   const data = [];
   const today = new Date();
-  
+
   let dailyBase = 1000;
   let monthlyBase = 5000;
-  
+
   for (let i = days - 1; i >= 0; i--) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
-    
+
     // Add some random variation
     const dailyVariation = Math.random() * 200 - 100;
     const monthlyVariation = Math.random() * 500 - 250;
-    
+
     // Trend upwards slightly
     dailyBase += 10;
     monthlyBase += 50;
-    
+
     data.push({
       date: date.toISOString(),
       dailyUsers: Math.max(0, Math.round(dailyBase + dailyVariation)),
       monthlyUsers: Math.max(0, Math.round(monthlyBase + monthlyVariation)),
     });
   }
-  
+
   return data;
 };
 
 function Component() {
   return (
-    <div className="container max-w-[1000px] space-y-8">
+    <div className="py-8 container max-w-[1000px] space-y-8">
       <BadgeContainer label="Daily Users View">
         <CombinedBarChart
           title="User Activity"
