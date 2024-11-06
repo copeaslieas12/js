@@ -28,63 +28,63 @@ import { useActiveWallet } from "../../core/hooks/wallets/useActiveWallet.js";
  * ```
  */
 export function SiteEmbed({
-	src,
-	client,
-	ecosystem,
-	...props
+  src,
+  client,
+  ecosystem,
+  ...props
 }: {
-	src: string;
-	client: ThirdwebClient;
-	ecosystem?: Ecosystem;
+  src: string;
+  client: ThirdwebClient;
+  ecosystem?: Ecosystem;
 } & React.DetailedHTMLProps<
-	React.IframeHTMLAttributes<HTMLIFrameElement>,
-	HTMLIFrameElement
+  React.IframeHTMLAttributes<HTMLIFrameElement>,
+  HTMLIFrameElement
 >) {
-	if (!client.clientId) {
-		throw new Error("The SiteEmbed client must have a clientId");
-	}
+  if (!client.clientId) {
+    throw new Error("The SiteEmbed client must have a clientId");
+  }
 
-	const activeWallet = useActiveWallet();
-	const walletId = activeWallet?.id;
+  const activeWallet = useActiveWallet();
+  const walletId = activeWallet?.id;
 
-	const {
-		data: { authProvider, authCookie } = {},
-	} = useQuery({
-		queryKey: ["site-embed", walletId, src, client.clientId, ecosystem],
-		enabled:
-			activeWallet && (isEcosystemWallet(activeWallet) || walletId === "inApp"),
-		queryFn: async () => {
-			const storage = new ClientScopedStorage({
-				storage: webLocalStorage,
-				clientId: client.clientId,
-				ecosystem,
-			});
+  const {
+    data: { authProvider, authCookie } = {},
+  } = useQuery({
+    queryKey: ["site-embed", walletId, src, client.clientId, ecosystem],
+    enabled:
+      activeWallet && (isEcosystemWallet(activeWallet) || walletId === "inApp"),
+    queryFn: async () => {
+      const storage = new ClientScopedStorage({
+        storage: webLocalStorage,
+        clientId: client.clientId,
+        ecosystem,
+      });
 
-			const authProvider = await getLastAuthProvider(webLocalStorage);
-			const authCookie = await storage.getAuthCookie();
+      const authProvider = await getLastAuthProvider(webLocalStorage);
+      const authCookie = await storage.getAuthCookie();
 
-			return { authProvider, authCookie };
-		},
-	});
+      return { authProvider, authCookie };
+    },
+  });
 
-	const url = new URL(src);
-	if (walletId) {
-		url.searchParams.set("walletId", walletId);
-	}
-	if (authProvider) {
-		url.searchParams.set("authProvider", authProvider);
-	}
-	if (authCookie) {
-		url.searchParams.set("authCookie", authCookie);
-	}
+  const url = new URL(src);
+  if (walletId) {
+    url.searchParams.set("walletId", walletId);
+  }
+  if (authProvider) {
+    url.searchParams.set("authProvider", authProvider);
+  }
+  if (authCookie) {
+    url.searchParams.set("authCookie", authCookie);
+  }
 
-	return (
-		<iframe
-			src={encodeURI(url.toString())}
-			width="100%"
-			height="100%"
-			allowFullScreen
-			{...props}
-		/>
-	);
+  return (
+    <iframe
+      src={encodeURI(url.toString())}
+      width="100%"
+      height="100%"
+      allowFullScreen
+      {...props}
+    />
+  );
 }

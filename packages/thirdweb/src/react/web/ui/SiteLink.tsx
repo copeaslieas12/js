@@ -29,58 +29,58 @@ import { useActiveWallet } from "../../core/hooks/wallets/useActiveWallet.js";
  * ```
  */
 export function SiteLink({
-	href,
-	client,
-	ecosystem,
-	children,
-	...props
+  href,
+  client,
+  ecosystem,
+  children,
+  ...props
 }: {
-	href: string;
-	client: ThirdwebClient;
-	ecosystem?: Ecosystem;
-	children: React.ReactNode;
+  href: string;
+  client: ThirdwebClient;
+  ecosystem?: Ecosystem;
+  children: React.ReactNode;
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
-	if (!client.clientId) {
-		throw new Error("The SiteLink client must have a clientId");
-	}
+  if (!client.clientId) {
+    throw new Error("The SiteLink client must have a clientId");
+  }
 
-	const activeWallet = useActiveWallet();
-	const walletId = activeWallet?.id;
+  const activeWallet = useActiveWallet();
+  const walletId = activeWallet?.id;
 
-	const {
-		data: { authProvider, authCookie } = {},
-	} = useQuery({
-		queryKey: ["site-link", walletId, href, client.clientId, ecosystem],
-		enabled:
-			activeWallet && (isEcosystemWallet(activeWallet) || walletId === "inApp"),
-		queryFn: async () => {
-			const storage = new ClientScopedStorage({
-				storage: webLocalStorage,
-				clientId: client.clientId,
-				ecosystem,
-			});
+  const {
+    data: { authProvider, authCookie } = {},
+  } = useQuery({
+    queryKey: ["site-link", walletId, href, client.clientId, ecosystem],
+    enabled:
+      activeWallet && (isEcosystemWallet(activeWallet) || walletId === "inApp"),
+    queryFn: async () => {
+      const storage = new ClientScopedStorage({
+        storage: webLocalStorage,
+        clientId: client.clientId,
+        ecosystem,
+      });
 
-			const authProvider = await getLastAuthProvider(webLocalStorage);
-			const authCookie = await storage.getAuthCookie();
+      const authProvider = await getLastAuthProvider(webLocalStorage);
+      const authCookie = await storage.getAuthCookie();
 
-			return { authProvider, authCookie };
-		},
-	});
+      return { authProvider, authCookie };
+    },
+  });
 
-	const url = new URL(href);
-	if (walletId) {
-		url.searchParams.set("walletId", walletId);
-	}
-	if (authProvider) {
-		url.searchParams.set("authProvider", authProvider);
-	}
-	if (authCookie) {
-		url.searchParams.set("authCookie", authCookie);
-	}
+  const url = new URL(href);
+  if (walletId) {
+    url.searchParams.set("walletId", walletId);
+  }
+  if (authProvider) {
+    url.searchParams.set("authProvider", authProvider);
+  }
+  if (authCookie) {
+    url.searchParams.set("authCookie", authCookie);
+  }
 
-	return (
-		<a href={encodeURI(url.toString())} {...props}>
-			{children}
-		</a>
-	);
+  return (
+    <a href={encodeURI(url.toString())} {...props}>
+      {children}
+    </a>
+  );
 }
