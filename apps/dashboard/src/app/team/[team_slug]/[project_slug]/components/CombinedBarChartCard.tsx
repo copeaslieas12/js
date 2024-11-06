@@ -7,7 +7,7 @@ type CombinedBarChartConfig<K extends string> = {
   [key in K]: { label: string; color: string };
 };
 
-export function CombinedBarChart<
+export function CombinedBarChartCard<
   T extends string,
   K extends Exclude<T, "date">,
 >({
@@ -20,8 +20,8 @@ export function CombinedBarChart<
   trendFn = (data, key) =>
     data.length >= 2
       ? ((data[data.length - 1]?.[key] as number) ?? 0) /
-          ((data[data.length - 2]?.[key] as number) ?? 0) -
-        1
+      ((data[data.length - 2]?.[key] as number) ?? 0) -
+      1
       : undefined,
 }: {
   title?: string;
@@ -36,7 +36,7 @@ export function CombinedBarChart<
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0">
         {title && (
           <div className="flex flex-1 flex-col justify-center gap-1 p-6">
-            <CardTitle className="font-semibold text-lg">{title}</CardTitle>
+            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
           </div>
         )}
         <div className="flex border-t">

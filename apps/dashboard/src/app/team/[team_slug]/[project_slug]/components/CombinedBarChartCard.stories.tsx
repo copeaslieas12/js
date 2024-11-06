@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BadgeContainer } from "stories/utils";
-import { CombinedBarChart } from "./CombinedBarChart";
+import { CombinedBarChartCard } from "./CombinedBarChartCard";
 
 const meta = {
   title: "project/Overview/CombinedBarChart",
@@ -63,9 +63,9 @@ const generateTimeSeriesData = (days: number) => {
 
 function Component() {
   return (
-    <div className="container max-w-[1000px] space-y-8 py-8">
+    <div className="py-8 container max-w-[1000px] space-y-8">
       <BadgeContainer label="Daily Users View">
-        <CombinedBarChart
+        <CombinedBarChartCard
           title="User Activity"
           chartConfig={chartConfig}
           data={generateTimeSeriesData(30)}
@@ -74,7 +74,7 @@ function Component() {
       </BadgeContainer>
 
       <BadgeContainer label="Monthly Users View">
-        <CombinedBarChart
+        <CombinedBarChartCard
           title="User Activity"
           chartConfig={chartConfig}
           data={generateTimeSeriesData(30)}

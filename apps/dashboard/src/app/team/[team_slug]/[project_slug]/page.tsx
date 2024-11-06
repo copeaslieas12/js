@@ -7,7 +7,7 @@ import {
 } from "components/analytics/date-range-selector";
 import { fetchAnalytics } from "data/analytics/fetch-analytics";
 import { notFound } from "next/navigation";
-import { CombinedBarChart } from "./components/CombinedBarChart";
+import { CombinedBarChartCard } from "./components/CombinedBarChartCard";
 import { EmptyState } from "./components/EmptyState";
 import { ProjectOverviewHeader } from "./components/ProjectOverviewHeader";
 
@@ -129,7 +129,7 @@ async function UsersChart({
   })();
 
   return (
-    <CombinedBarChart
+    <CombinedBarChartCard
       title="Users"
       chartConfig={{
         totalUsers: { label: "Total Users", color: "hsl(var(--chart-1))" },
