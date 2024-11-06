@@ -192,6 +192,45 @@ const MODULAR_CONTRACTS = {
   ],
 } satisfies ExploreCategory;
 
+const CROSS_CHAIN = {
+  id: "cross-chain",
+  name: "cross-chain",
+  displayName: "Cross Chain",
+  description:
+    "Collection of smart contracts that enable cross chain functionality using the modular contracts framework.",
+  isBeta: true,
+  contracts: [
+    // erc20 drop
+    [
+      "thirdweb.eth/ERC20CoreInitializable",
+      [
+        "deployer.thirdweb.eth/ClaimableERC20",
+        "deployer.thirdweb.eth/TransferableERC20",
+        "deployer.thirdweb.eth/SuperChainInterop",
+      ],
+      {
+        title: "Modular Token Drop",
+        description:
+          "ERC20 Tokens that others can mint and transfer cross-chain.",
+      },
+    ],
+    // erc20 token
+    [
+      "thirdweb.eth/ERC20CoreInitializable",
+      [
+        "deployer.thirdweb.eth/MintableERC20",
+        "deployer.thirdweb.eth/TransferableERC20",
+        "deployer.thirdweb.eth/SuperChainInterop",
+      ],
+      {
+        title: "Modular Token",
+        description:
+          "ERC20 Tokens that only owners can mint and transfer cross-chain.",
+      },
+    ],
+  ],
+} satisfies ExploreCategory;
+
 const AIRDROP = {
   id: "airdrop",
   name: "Airdrop",
@@ -281,6 +320,7 @@ const SMART_WALLET = {
 const CATEGORIES: Record<string, ExploreCategory> = {
   [POPULAR.id]: POPULAR,
   [MODULAR_CONTRACTS.id]: MODULAR_CONTRACTS,
+  [CROSS_CHAIN.id]: CROSS_CHAIN,
   [NFTS.id]: NFTS,
   [MARKETS.id]: MARKETS,
   [DROPS.id]: DROPS,

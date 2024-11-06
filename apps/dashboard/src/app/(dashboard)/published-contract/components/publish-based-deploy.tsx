@@ -84,6 +84,7 @@ export async function DeployFormForPublishInfo(props: PublishBasedDeployProps) {
           dispayName={publishedContract.displayName || publishedContract.name}
         />
       </DeployContractHeader>
+      <div className="font-bold text-5xl">ASD</div>
       <Separator />
       <DeployFormForUri
         contractMetadata={contractMetadata}
