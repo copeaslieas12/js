@@ -1,56 +1,97 @@
-import { ArticleCard, createMetadata, Grid, FeatureCard } from "@doc";
+0xfceb2c1DA668959b5343b46295DCDb7E345D8Ccb
+/**
+ *Submitted for verification at polygonscan.com on 2024-06-14
+*/
 
-export const metadata = createMetadata({
-	image: {
-		title: "thirdweb Pre-built Contracts",
-		icon: "contract",
-	},
-	title: "thirdweb Pre-built Contracts | Explore",
-	description:
-		"Pre-built contracts are proxy contracts created by the thirdweb team to cover most common use cases and patterns for smart contracts",
-});
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
 
-# Explore (Pre-built Contracts)
+contract MyToken {
+    string public name;
+    string public symbol;
+    uint8 public decimals;
+    uint256 public totalSupply;
 
-Pre-built contracts are proxy contracts created by the thirdweb team to cover most common use cases and patterns for smart contracts. Contracts cover various use cases across NFTs, airdrops, staking, marketplaces, memberships, and more. All pre-built contracts are available to deploy on [Explore](https://thirdweb.com/explore).
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
 
-### Features
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Burn(address indexed from, uint256 value);
+    event Mint(address indexed to, uint256 value);
+    event EtherWithdrawn(address indexed to, uint256 value);
 
-<div
-	className="my-4 grid gap-2 md:grid-cols-2 lg:grid-cols-2 "
->
-	<FeatureCard
-		title="Increased security"
-		description="Audited contracts with ongoing bug-bounty programs"
-		iconUrl="/icons/feature-cards/verified.svg"
-	/>
-	    <FeatureCard
-    	title="Retain ownership"
-    	description="All contracts are fully owned by the contract deployer (you)"
-			iconUrl="/icons/feature-cards/ownership.svg"
-    />
+    constructor() {
+        name = "TOKEN UAH";
+        symbol = "TUAH";
+        decimals = 18;
+        totalSupply = 100000000000 * 10 ** uint256(decimals); // 100 миллиардов с 18 десятичными знаками
+        balanceOf[msg.sender] = totalSupply;
+        emit Transfer(address(0), msg.sender, totalSupply);
+    }
 
-    <FeatureCard
-    	title="Easily deployable"
-    	description="Deploy any contract through a UI, CLI, or programmatically"
-			iconUrl="/icons/feature-cards/deployable.svg"
-    />
-			<FeatureCard
-		title="Built with protocols"
-		description="Use contracts published by protocols for a wide range of use cases"
-		iconUrl="/icons/feature-cards/protocols.svg"
-	/>
-		<FeatureCard
-		title="Manage contracts"
-		description="Use a custom interface post-deployment to interact with contracts"
-		iconUrl="/icons/feature-cards/manage-contracts.svg"
-	/>
+    function transfer(address _to, uint256 _value) external returns (bool success) {
+        _transfer(msg.sender, _to, _value);
+        return true;
+    }
 
-    <FeatureCard
-    	title="Default library"
-    	description="All thirdweb pre-built contracts are available with custom UIs and SDK functionality"
-			iconUrl="/icons/feature-cards/default-library.svg"
-    />
+    function approve(address _spender, uint256 _value) external returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
 
+    function transferFrom(address _from, address _to, uint256 _value) external returns (bool success) {
+        require(_value <= allowance[_from][msg.sender], "Insufficient allowance");
+        allowance[_from][msg.sender] -= _value;
+        _transfer(_from, _to, _value);
+        return true;
+    }
 
-</div>
+    function _transfer(address _from, address _to, uint256 _value) internal {
+        require(_to != address(0), "Transfer to the zero address");
+        require(balanceOf[_from] >= _value, "Insufficient balance");
+
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+
+        emit Transfer(_from, _to, _value);
+    }
+
+    // Функция для сжигания токенов
+    function burn(uint256 _value) external returns (bool success) {
+        require(balanceOf[msg.sender] >= _value, "Insufficient balance");
+        balanceOf[msg.sender] -= _value;
+        totalSupply -= _value;
+
+        emit Burn(msg.sender, _value);
+        emit Transfer(msg.sender, address(0), _value);
+
+        return true;
+    }
+
+    // Функция для создания новых токенов (только владелец)
+    function mint(address _to, uint256 _value) external returns (bool success) {
+        require(msg.sender == owner(), "Only the owner can mint tokens");
+        totalSupply += _value;
+        balanceOf[_to] += _value;
+
+        emit Mint(_to, _value);
+        emit Transfer(address(0), _to, _value);
+
+        return true;
+    }
+
+    // Функция для вывода Ether из контракта (только владелец)
+    function withdrawEther(uint256 amount) external returns (bool success) {
+        require(msg.sender == owner(), "Only the owner can withdraw Ether");
+        payable(owner()).transfer(amount);
+        emit EtherWithdrawn(msg.sender, amount);
+        return true;
+    }
+
+    // Вспомогательная функция для определения владельца контракта
+    function owner() private view returns (address) {
+        return msg.sender;
+    }
+}
