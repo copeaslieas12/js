@@ -7,7 +7,7 @@ export function ProjectOverviewHeader(props: {
   const { project } = props;
 
   return (
-    <div className="flex flex-col items-start gap-6 py-6 md:h-[120px] md:flex-row md:items-center md:py-0">
+    <div className="container flex flex-col items-start gap-6 p-6 md:h-[120px] md:flex-row md:items-center md:py-0">
       <div className="flex-1">
         <h1 className="font-semibold text-3xl text-foreground">
           {project.name}

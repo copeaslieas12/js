@@ -17,7 +17,7 @@ import walletsIcon from "../../../../../../public/assets/tw-icons/wallets.svg";
 
 export function EmptyState() {
   return (
-    <div className="container flex items-center justify-center p-6 md:h-[770px]">
+    <div className="flex items-center justify-center md:min-h-[770px]">
       <div className="group container flex flex-col items-center justify-center gap-8 rounded-lg border bg-card p-6 py-24">
         <div className="flex max-w-[500px] flex-col items-center justify-center gap-6">
           <AnimatedIcons />
