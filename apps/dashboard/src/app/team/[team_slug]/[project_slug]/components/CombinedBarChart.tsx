@@ -35,8 +35,8 @@ export function CombinedBarChart<
     <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0">
         {title && (
-          <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-            <CardTitle>{title}</CardTitle>
+          <div className="flex flex-1 flex-col justify-center gap-1 p-6">
+            <CardTitle className="font-semibold text-lg">{title}</CardTitle>
           </div>
         )}
         <div className="flex border-t">
@@ -57,7 +57,7 @@ export function CombinedBarChart<
                 <Stat
                   label={chartConfig[key].label}
                   value={aggregateFn(data, key) ?? "--"}
-                  trend={trendFn(data, key)}
+                  trend={trendFn(data, key) || undefined}
                 />
                 <div
                   className="absolute right-0 bottom-0 left-0 h-0 bg-foreground transition-all duration-300 ease-out data-[active=true]:h-[3px]"

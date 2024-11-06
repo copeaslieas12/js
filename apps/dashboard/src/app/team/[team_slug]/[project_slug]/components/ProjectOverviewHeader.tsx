@@ -1,10 +1,13 @@
 import type { Project } from "@/api/projects";
+import type { Range } from "components/analytics/date-range-selector";
 import { RangeSelector } from "components/analytics/range-selector";
 
 export function ProjectOverviewHeader(props: {
   project: Project;
+  interval: "day" | "week";
+  range: Range;
 }) {
-  const { project } = props;
+  const { project, interval, range } = props;
 
   return (
     <div className="container flex flex-col items-start gap-6 p-6 md:h-[120px] md:flex-row md:items-center md:py-0">
@@ -13,7 +16,7 @@ export function ProjectOverviewHeader(props: {
           {project.name}
         </h1>
       </div>
-      <RangeSelector interval="day" />
+      <RangeSelector interval={interval} range={range} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { getLastNDaysRange } from "components/analytics/date-range-selector";
 import { projectStub } from "stories/stubs";
 import { BadgeContainer, mobileViewport } from "stories/utils";
 import { ProjectOverviewHeader } from "./ProjectOverviewHeader";
@@ -35,7 +36,11 @@ function Component() {
   return (
     <div className="container max-w-[1150px] py-8">
       <BadgeContainer label="Base">
-        <ProjectOverviewHeader project={projectStub("123", "456")} />
+        <ProjectOverviewHeader
+          project={projectStub("123", "456")}
+          interval="day"
+          range={getLastNDaysRange("last-120")}
+        />
       </BadgeContainer>
     </div>
   );

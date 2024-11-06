@@ -63,7 +63,7 @@ const generateTimeSeriesData = (days: number) => {
 
 function Component() {
   return (
-    <div className="py-8 container max-w-[1000px] space-y-8">
+    <div className="container max-w-[1000px] space-y-8 py-8">
       <BadgeContainer label="Daily Users View">
         <CombinedBarChart
           title="User Activity"
